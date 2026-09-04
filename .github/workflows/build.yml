@@ -8,19 +8,13 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Install Toolchain
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y g++-aarch64-linux-gnu cmake make
+    - name: Install Build Tools
+      run: sudo apt-get update && sudo apt-get install -y cmake build-essential
 
-    - name: Compile Library
+    - name: Compile 
       run: |
         mkdir build && cd build
-        cmake -DCMAKE_SYSTEM_NAME=Linux \
-              -DCMAKE_SYSTEM_PROCESSOR=aarch64 \
-              -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc \
-              -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-g++ \
-              ..
+        cmake ..
         cmake --build .
 
     - name: Upload Artifact
