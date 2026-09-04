@@ -1,10 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(StandoffGodMode)
+project(StandoffCheat)
 
-set(CMAKE_CXX_STANDARD 11)
-
-# Создаем разделяемую библиотеку (получится libStandoffGodMode.so)
-add_library(StandoffGodMode SHARED main.cpp)
-
-# Подключаем андроидные библиотеки для логирования
-target_link_libraries(StandoffGodMode log)
+# Указываем, что собираем именно разделяемую библиотеку .so
+add_library(StandoffCheat SHARED main.cpp)
