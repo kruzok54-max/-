@@ -1,0 +1,19 @@
+name: Build SO
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install Compiler
+      run: sudo apt-get update && sudo apt-get install -y g++-aarch64-linux-gnu cmake
+    - name: Build Library
+      run: |
+        mkdir build && cd build
+        cmake -DCMAKE_SYSTEM_NAME=Linux -DCMAKE_SYSTEM_PROCESSOR=aarch64 ..
+        cmake --build .
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: compiled-so
+        path: build/*.so
